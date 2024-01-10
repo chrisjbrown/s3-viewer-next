@@ -9,6 +9,31 @@ const users = [
   },
 ];
 
+const images = [
+  {
+    id: '410544b2-4001-4271-9855-fec4b6a6442a',
+    title: 'image1',
+    url: 'user@nextmail.com',
+  },
+  {
+    id: '410544b2-4001-4271-9855-fec4b6a6442b',
+    title: 'image2',
+    url: 'user@nextmail.com',
+  },
+];
+
+const tags = [
+  {
+    id: '410544b2-4001-4271-9855-fec4b6a6442c',
+    name: 'tag1',
+  },
+  {
+    id: '410544b2-4001-4271-9855-fec4b6a6442d',
+    name: 'tag2',
+  },
+
+]
+
 const customers = [
   {
     id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
@@ -181,6 +206,8 @@ const revenue = [
 ];
 
 module.exports = {
+  images,
+  tags,
   users,
   customers,
   invoices,

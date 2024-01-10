@@ -3,20 +3,23 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "lint": "next lint",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
-    "start": "next start",
     "seed": "node -r dotenv/config ./scripts/seed.js",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@prisma/client": "^5.7.1",
     "@tailwindcss/forms": "^0.5.7",
     "@types/node": "20.5.7",
     "@vercel/postgres": "^0.5.0",
     "autoprefixer": "10.4.15",
+    "aws-sdk": "^2.1532.0",
     "bcrypt": "^5.1.1",
     "clsx": "^2.0.0",
+    "framer-motion": "^10.17.9",
     "next": "^14.0.2",
     "postcss": "8.4.31",
     "react": "18.2.0",
