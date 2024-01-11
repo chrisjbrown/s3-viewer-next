@@ -1,6 +1,6 @@
 import { useFormState } from 'react-dom';
-import { uploadFile } from '@/app/add/actions';
-import { SubmitButton } from '@/app/add/submit-button';
+import { uploadFile } from '@/app/lib/actions';
+import { SubmitButton } from '@/app/ui/submit-button';
 
 const initialState = { message: null };
 
@@ -11,11 +11,9 @@ export function UploadForm() {
     <div>
       <form action={formAction}>
         <input type="file" id="file" name="file" accept="images/*" />
-        <SubmitButton />
+        <SubmitButton text="Submit" />
       </form>
-      {state?.status && (
-        <div className={`state-message ${state?.status}`}>{state?.message}</div>
-      )}
+      {state?.status && <div>{state?.message}</div>}
     </div>
   );
 }

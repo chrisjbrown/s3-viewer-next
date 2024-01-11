@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         width="500"
         height="500"
       />
-      <DeleteForm id={id} />
+      <DeleteForm id={id} title={image.title} />
     </div>
   );
 }
