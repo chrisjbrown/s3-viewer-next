@@ -6,21 +6,21 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Image {
   id    Int            @id @default(autoincrement())
-  title String
+  title String         @unique
   url   String
   tags  TagsOnImages[]
 }
 
 model Tag {
   id     Int            @id @default(autoincrement())
-  name   String
+  name   String         @unique
   images TagsOnImages[]
 }
 
