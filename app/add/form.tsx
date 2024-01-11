@@ -1,6 +1,6 @@
 import { useFormState } from 'react-dom';
-import { uploadFile } from '@/app/add/(form)/actions';
-import { SubmitButton } from '@/app/add/(form)/submit-button';
+import { uploadFile } from '@/app/add/actions';
+import { SubmitButton } from '@/app/add/submit-button';
 
 const initialState = { message: null };
 

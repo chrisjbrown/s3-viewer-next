@@ -1,5 +1,5 @@
 'use client';
-import { UploadForm } from '@/app/add/(form)/form';
+import { UploadForm } from '@/app/add/form';
 
 export default function Page() {
   return (
