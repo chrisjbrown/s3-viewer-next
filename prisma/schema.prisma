@@ -12,23 +12,14 @@ datasource db {
 }
 
 model Image {
-  id    Int            @id @default(autoincrement())
-  title String         @unique
+  id    Int    @id @default(autoincrement())
+  title String @unique
   url   String
-  tags  TagsOnImages[]
+  tags  Tag[]
 }
 
 model Tag {
-  id     Int            @id @default(autoincrement())
-  name   String         @unique
-  images TagsOnImages[]
-}
-
-model TagsOnImages {
-  image   Image @relation(fields: [imageId], references: [id])
-  imageId Int
-  tag     Tag   @relation(fields: [tagId], references: [id])
-  tagId   Int
-
-  @@id([imageId, tagId])
+  value  String  @id
+  label  String
+  images Image[]
 }

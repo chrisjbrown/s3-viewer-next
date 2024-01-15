@@ -12,7 +12,7 @@ export function DeleteForm({ id, title }: { id: string; title: string }) {
 
   return (
     <form action={dispatchDelete}>
-      <SubmitButton text="Delete" />
+      <SubmitButton text="Delete Image" />
       {state?.status === 'error' && (
         <p className="mt-2 text-sm text-red-500">{state.message}</p>
       )}

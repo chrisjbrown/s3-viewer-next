@@ -70,7 +70,6 @@ export async function uploadFile(prevState: any, formData: FormData) {
         url: `https://s3.${process.env.NEXT_PUBLIC_APP_AWS_REGION}.amazonaws.com/${process.env.NEXT_PUBLIC_APP_AWS_S3_BUCKET_NAME}/${file.name}`,
       },
     });
-    console.log('dbentry', dbEntry);
   } catch (error) {
     console.error(error);
     return { status: 'error', message: 'Failed to upload file.' };

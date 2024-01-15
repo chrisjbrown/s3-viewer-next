@@ -1,13 +1,16 @@
 import { unstable_noStore as noStore } from 'next/cache';
 import prisma from '@/app/lib/prisma';
 
-export async function fetchImageById(id: string) {
+export async function fetchImageById(id: number) {
   noStore();
 
   try {
     const image = await prisma.image.findUnique({
       where: {
-        id: Number(id),
+        id: id,
+      },
+      include: {
+        tags: true,
       },
     });
     console.log('image found', image);
@@ -18,19 +21,11 @@ export async function fetchImageById(id: string) {
   }
 }
 
-export async function deleteImageById(id: string) {
-  noStore();
-
+export async function fetchTags() {
   try {
-    const image = await prisma.image.delete({
-      where: {
-        id: Number(id),
-      },
-    });
-    console.log('image deleted', image);
-    return image;
+    return await prisma.tag.findMany();
   } catch (error) {
     console.error('Prisma Error:', error);
-    throw new Error('Failed to find image');
+    throw new Error('Failed to find tags');
   }
 }
