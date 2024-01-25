@@ -4,7 +4,7 @@ import { fetchImageById } from '@/app/lib/data';
 import { DeleteForm } from '@/app/edit/[id]/delete-form';
 import { AddTagInput } from '@/app/edit/[id]/add-tag-input';
 import { fetchTags } from '@/app/lib/data';
-import HomeLink from '@/app/ui/home-link';
+import BackButton from '@/app/ui/back-button';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <HomeLink />
+      <BackButton />
       <div className="text-center">
         <h1>{image.title}</h1>
         <Image
