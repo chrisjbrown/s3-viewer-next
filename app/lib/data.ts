@@ -29,3 +29,25 @@ export async function fetchTags() {
     throw new Error('Failed to find tags');
   }
 }
+
+export async function getImagesByTags(tags: string[]) {
+  console.log('tags', tags);
+  try {
+    return tags.length === 0
+      ? prisma.image.findMany()
+      : prisma.image.findMany({
+          where: {
+            tags: {
+              some: {
+                value: {
+                  in: tags,
+                },
+              },
+            },
+          },
+        });
+  } catch (error) {
+    console.error('Prisma Error:', error);
+    throw new Error('Failed to find images');
+  }
+}

@@ -100,7 +100,33 @@ export function AddTagInput({
 
   return (
     <CreatableSelect
-      className="max-w-80"
+      styles={{
+        // clearIndicator: () => 'bg-slate-900',
+        // dropdownIndicator: () => 'text-slate',
+        // indicatorsContainer: () => 'text-slate',
+        // indicatorSeparator: () => 'text-slate',
+        // loadingIndicator: () => 'bg-slate-900',
+        // loadingMessage: () => 'bg-slate-900',
+        // menu: () => 'bg-slate-900',
+        // menuList: () => 'bg-slate-900',
+        // menuPortal: () => 'bg-slate-900',
+        multiValue: (baseStyles, state) => ({
+          ...baseStyles,
+          color: 'slategray',
+        }),
+        multiValueLabel: (baseStyles, state) => ({
+          ...baseStyles,
+          color: 'slategray',
+        }),
+        // multiValueRemove: () => 'text-slate',
+        // noOptionsMessage: () => 'text-slate',
+        option: (baseStyles, state) => ({
+          ...baseStyles,
+          color: 'slategray',
+        }),
+        // singleValue: () => 'bg-slate-900',
+        // valueContainer: () => 'bg-slate-900',
+      }}
       isMulti
       isClearable={false}
       isDisabled={isPending}

@@ -1,6 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import prisma from '@/app/lib/prisma';
 
-export async function POST(req, res) {
+export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
   try {
     const tag = await prisma.tag.create({

@@ -1,5 +1,5 @@
 import '@/app/ui/global.css';
-import { inter } from '@/app/ui/fonts';
+import { teko } from '@/app/ui/fonts';
 
 export default function RootLayout(props: {
   children: React.ReactNode;
@@ -7,7 +7,9 @@ export default function RootLayout(props: {
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
+      <body
+        className={`${teko.className} bg-white text-white antialiased dark:bg-slate-900`}
+      >
         {props.children}
         {props.modal}
       </body>
