@@ -22,6 +22,7 @@ export async function fetchImageById(id: number) {
 }
 
 export async function fetchTags() {
+  noStore();
   try {
     return await prisma.tag.findMany();
   } catch (error) {

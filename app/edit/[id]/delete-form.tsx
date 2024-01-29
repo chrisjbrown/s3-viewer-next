@@ -1,6 +1,6 @@
 'use client';
 import { deleteImageById as deleteImage } from '@/app/lib/actions';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormState } from 'react-dom';
 import { Button } from '@/app/ui/button';
 
 const initialState = { message: '', status: '' };
@@ -16,7 +16,6 @@ export function DeleteForm({
 }) {
   const deleteImageById = deleteImage.bind(null, id, title);
   const [state, dispatchDelete] = useFormState(deleteImageById, initialState);
-  const { pending } = useFormStatus();
 
   return (
     <form className={style} action={dispatchDelete}>

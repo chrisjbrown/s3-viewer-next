@@ -1,6 +1,6 @@
 'use server';
 import prisma from '@/app/lib/prisma';
-import { Prisma as PrismaLib } from '@prisma/client';
+import { Prisma as PrismaLib, Tag as TagType } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import {
@@ -102,4 +102,45 @@ export async function deleteImageById(id: string, title: string) {
   }
   revalidatePath('/');
   redirect('/');
+}
+
+export async function addTag(formData: FormData) {
+  const tagLabel = formData.get('tagLabel') as string;
+  try {
+    await prisma.tag.create({
+      data: {
+        label: tagLabel,
+        value: tagLabel.toLowerCase().replace(/\W/g, ''),
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return { status: 'error', message: 'Failed to create tag.' };
+  }
+  revalidatePath('/edit-tags');
+}
+
+export async function deleteTag(tagValue: string) {
+  try {
+    await prisma.tag.update({
+      where: {
+        value: tagValue,
+      },
+      data: {
+        images: {
+          set: [],
+        },
+      },
+    });
+
+    await prisma.tag.delete({
+      where: {
+        value: tagValue,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return { status: 'error', message: 'Failed to delete tag.' };
+  }
+  revalidatePath('/edit-tags');
 }
