@@ -22,17 +22,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
     });
 
     return NextResponse.json({
-      success: true,
+      message: 'success',
+      status: 'success',
     });
   } catch (error) {
-    console.error(error);
-    // if (error instanceof PrismaLib.PrismaClientKnownRequestError) {
-    //   if (error.code === 'P2025') {
-    //     console.error('Record to delete does not exist.');
-    //     revalidatePath('/');
-    //     redirect('/');
-    //   }
-    // }
-    return { status: 'error', message: 'Failed to delete tag.' };
+    console.error('Post error:', error);
+    throw new Error('Failed to delete tag');
   }
 }

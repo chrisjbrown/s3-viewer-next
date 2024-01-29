@@ -68,10 +68,7 @@ export function AddTagInput({
     }
   }
 
-  async function onChange(
-    selected: Tag[] | null,
-    actionMeta: ActionMeta<Tag> | undefined,
-  ) {
+  async function onChange(selected: any, actionMeta: ActionMeta<Tag>) {
     console.log(actionMeta);
 
     setIsPending(true);
@@ -81,8 +78,10 @@ export function AddTagInput({
         setOptions((prev) => [...prev, createdTag]);
         setImageTags((prev: Tag[]) => [...prev, createdTag]);
       case 'select-option':
-        const addedTag = await addTag(actionMeta?.option?.value);
-        setImageTags((prev: Tag[]) => [...prev, addedTag]);
+        if (actionMeta?.option?.value) {
+          const addedTag = await addTag(actionMeta?.option?.value);
+          setImageTags((prev: Tag[]) => [...prev, addedTag]);
+        }
         break;
       case 'remove-value':
         await removeTag(actionMeta?.removedValue?.value);
