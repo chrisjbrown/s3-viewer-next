@@ -11,7 +11,7 @@ import {
 import sharp from 'sharp';
 
 const s3Client = new S3Client({
-  region: process.env.NEXT_PUBLIC_APP_AWS_REGION || 'us-east-2',
+  region: process.env.NEXT_PUBLIC_APP_AWS_REGION || '',
   credentials: {
     accessKeyId: process.env.NEXT_PUBLIC_APP_AWS_ACCESS_KEY || '',
     secretAccessKey: process.env.NEXT_PUBLIC_APP_AWS_SECRET_ACCESS_KEY || '',
@@ -22,7 +22,8 @@ async function uploadFileToS3(file: Buffer, fileName: string) {
   const fileBuffer = await sharp(file).toBuffer();
 
   const params = {
-    Bucket: process.env.NEXT_PUBLIC_APP_AWS_S3_BUCKET_NAME,
+    Bucket:
+      process.env.NEXT_PUBLIC_APP_AWS_S3_BUCKET_NAME || 'bluegreymousefoundry',
     Key: fileName,
     Body: fileBuffer,
   };
