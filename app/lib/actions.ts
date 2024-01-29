@@ -11,7 +11,7 @@ import {
 import sharp from 'sharp';
 
 const s3Client = new S3Client({
-  region: process.env.NEXT_PUBLIC_APP_AWS_REGION || '',
+  region: process.env.NEXT_PUBLIC_APP_AWS_REGION || 'us-east-2',
   credentials: {
     accessKeyId: process.env.NEXT_PUBLIC_APP_AWS_ACCESS_KEY || '',
     secretAccessKey: process.env.NEXT_PUBLIC_APP_AWS_SECRET_ACCESS_KEY || '',
