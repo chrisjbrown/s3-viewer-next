@@ -87,12 +87,12 @@ export async function uploadFiles(prevState: any, formData: FormData) {
   return { status: 'success', message: 'Files uploaded successfully' };
 }
 
-export async function deleteImageById(id: string, title: string) {
+export async function deleteImageById(id: number, title: string) {
   try {
     await deleteFileFromS3(title);
     await prisma.image.delete({
       where: {
-        id: Number(id),
+        id: id,
       },
     });
 
