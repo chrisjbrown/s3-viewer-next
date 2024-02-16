@@ -10,7 +10,7 @@ export function DeleteForm({
   title,
   style,
 }: {
-  id: string;
+  id: number;
   title: string;
   style?: string;
 }) {

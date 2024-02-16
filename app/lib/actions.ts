@@ -54,30 +54,37 @@ async function deleteFileFromS3(fileName: string) {
   }
 }
 
-export async function uploadFile(prevState: any, formData: FormData) {
-  let dbEntry;
-  try {
-    const file = formData.get('file') as File;
+async function uploadFile(file: File) {
+  const buffer = Buffer.from(await file.arrayBuffer());
+  await uploadFileToS3(buffer, file.name);
+  await prisma.image.create({
+    data: {
+      title: file.name,
+      url: `https://s3.${process.env.NEXT_PUBLIC_APP_AWS_REGION}.amazonaws.com/${process.env.NEXT_PUBLIC_APP_AWS_S3_BUCKET_NAME}/${file.name}`,
+    },
+  });
+}
 
-    if (file.size === 0) {
-      return { status: 'error', message: 'Please select a file.' };
+export async function uploadFiles(prevState: any, formData: FormData) {
+  try {
+    const files = formData.getAll('files') as File[];
+
+    if (!files || files.length === 0) {
+      return { status: 'error', message: 'Please select at least one file.' };
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    await uploadFileToS3(buffer, file.name);
-    dbEntry = await prisma.image.create({
-      data: {
-        title: file.name,
-        url: `https://s3.${process.env.NEXT_PUBLIC_APP_AWS_REGION}.amazonaws.com/${process.env.NEXT_PUBLIC_APP_AWS_S3_BUCKET_NAME}/${file.name}`,
-      },
+    const uploads = files.map((file) => {
+      return uploadFile(file);
     });
+
+    await Promise.all(uploads);
   } catch (error) {
     console.error(error);
     return { status: 'error', message: 'Failed to upload file.' };
   }
 
-  revalidatePath('/');
-  redirect(`/edit/${dbEntry.id}`);
+  revalidatePath('/upload');
+  return { status: 'success', message: 'Files uploaded successfully' };
 }
 
 export async function deleteImageById(id: string, title: string) {
