@@ -8,13 +8,16 @@ import { Tag as TagType, Image as ImageType } from '@prisma/client';
 
 export default function ImageModal({
   image,
+  tags,
   close,
+  deleteImage,
 }: {
   image: ImageType | null;
   tags: TagType[];
   close: React.MouseEventHandler;
+  deleteImage: Function;
 }) {
-  const [tags, setTags] = useState<TagType[]>([]);
+  const [imageTags, setImageTags] = useState<TagType[]>([]);
   const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
@@ -33,7 +36,7 @@ export default function ImageModal({
         .then((res) => res.json())
         .then((data) => {
           console.log('response from get tags', data.tags);
-          setTags(data.tags);
+          setImageTags(data.tags);
           setIsPending(false);
         });
     } catch (error) {
@@ -72,7 +75,7 @@ export default function ImageModal({
             {!isPending && (
               <AddTagInput
                 allTags={tags}
-                initialImageTags={tags}
+                initialImageTags={imageTags}
                 id={image.id}
               />
             )}
@@ -84,7 +87,12 @@ export default function ImageModal({
             >
               Copy
             </button>
-            <DeleteForm style="ml-auto" id={image.id} title={image.title} />
+            <DeleteForm
+              style="ml-auto"
+              id={image.id}
+              title={image.title}
+              onDeleteImage={deleteImage}
+            />
           </div>
         </div>
       </div>

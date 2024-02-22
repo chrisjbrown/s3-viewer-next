@@ -14,7 +14,6 @@ export default function Images({
   const tagsParam = searchParams.tags;
   const [images, setImages] = useState<ImageType[]>([]);
   const [isPending, setIsPending] = useState(true);
-  const [isSearching, setIsSearching] = useState(false);
   const [selectedImage, selectImage] = useState<ImageType | null>(null);
 
   useEffect(() => {
@@ -49,7 +48,6 @@ export default function Images({
   function onSearch(event: React.ChangeEvent<HTMLInputElement>) {
     const query = event.target.value;
 
-    setIsSearching(true);
     try {
       fetch('/api/image-search', {
         method: 'POST',
@@ -62,11 +60,15 @@ export default function Images({
         .then((data) => {
           console.log('response from search images', data.images);
           setImages(data.images);
-          setIsSearching(false);
         });
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function onDeleteImage(id: number) {
+    setImages(images.filter((image) => image.id !== id));
+    selectImage(null);
   }
 
   if (isPending) {
@@ -76,10 +78,20 @@ export default function Images({
   return (
     <>
       {selectedImage && (
-        <ImageModal image={selectedImage} tags={tags} close={closeModal} />
+        <ImageModal
+          image={selectedImage}
+          tags={tags}
+          close={closeModal}
+          deleteImage={onDeleteImage}
+        />
       )}
       <div className="mx-auto">
-        <input className="text-slate-800" type="text" onInput={onSearch} />
+        <input
+          className="text-slate-800"
+          type="text"
+          onInput={onSearch}
+          placeholder="Search"
+        />
       </div>
 
       <div className="mx-auto mb-12 mt-6 grid grid-cols-4 justify-center gap-6">
