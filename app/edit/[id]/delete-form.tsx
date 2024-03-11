@@ -9,11 +9,11 @@ export function DeleteForm({
   id,
   title,
   style,
-  // onDeleteImage,
+  onDeleteImage,
 }: {
   id: number;
   title: string;
-  // onDeleteImage: Function;
+  onDeleteImage: Function;
   style?: string;
 }) {
   const deleteImageById = deleteImage.bind(null, id, title);
@@ -21,7 +21,7 @@ export function DeleteForm({
 
   function formAction() {
     dispatchDelete();
-    // onDeleteImage();
+    onDeleteImage();
   }
 
   return (

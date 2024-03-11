@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             id={parseInt(id)}
           />
 
-          <DeleteForm style="ml-auto" id={Number(id)} title={image.title} />
+          {/* <DeleteForm style="ml-auto" id={Number(id)} title={image.title} /> */}
         </div>
       </div>
     </div>
